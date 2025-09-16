@@ -139,6 +139,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  prof_26_uikit:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "16-09-25"
+      resolved-ref: "62864be05d080d67028636b4821583b6de870e82"
+      url: "https://gitlab.com/diquoks/prof-26-uikit.git"
+    source: git
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
