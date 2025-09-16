@@ -144,7 +144,7 @@ packages:
     description:
       path: "."
       ref: "16-09-25"
-      resolved-ref: "62864be05d080d67028636b4821583b6de870e82"
+      resolved-ref: "908e848682704e738faefaaf1b2b9b66dd90173a"
       url: "https://gitlab.com/diquoks/prof-26-uikit.git"
     source: git
     version: "0.0.1"
