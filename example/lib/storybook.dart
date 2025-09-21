@@ -11,15 +11,7 @@ class StorybookApp extends StatelessWidget {
       wrapperBuilder: (BuildContext context, Widget? widget) {
         return MaterialAppWrapper(widget: widget);
       },
-      stories: [
-        Story(
-          name: "testStory",
-          builder: (BuildContext context) {
-            var theme = CustomTheme.of(context);
-            return Text("Hello World!", style: theme.styles.defaultStyle);
-          },
-        ),
-      ],
+      stories: [TestButton.story],
     );
   }
 }
