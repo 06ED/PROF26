@@ -7,4 +7,6 @@ class Styles {
   Styles({required this.palette});
 
   TextStyle get defaultStyle => TextStyle(color: palette.foregroundColor);
+
+  TextStyle get invertStyle => TextStyle(color: palette.backgroundColor);
 }
