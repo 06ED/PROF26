@@ -31,6 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   storybook_flutter: ^0.14.1
+  flutter_screenutil: ^5.9.3
+  prof_26_uikit:
+    path: ../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
