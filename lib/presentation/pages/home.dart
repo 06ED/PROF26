@@ -10,9 +10,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.palette.backgroundColor,
       resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Text("Hello world!", style: theme.styles.defaultStyle),
-      ),
+      body: Center(child: TestButton(text: "Hello World!")),
     );
   }
 }
