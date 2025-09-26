@@ -10,7 +10,7 @@ class MaterialAppWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(500, 1000),
+      designSize: Size(375, 812),
       builder: (_, __) {
         return MaterialApp(
           theme: ThemeData().copyWith(

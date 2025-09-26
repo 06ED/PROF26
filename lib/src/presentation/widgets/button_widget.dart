@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:prof_26_uikit/prof_26_uikit.dart";
+import "package:storybook_flutter/storybook_flutter.dart";
 
 abstract class BaseButtonWidget extends StatelessWidget {
   final CustomTheme theme;
-  final Function() onTap;
+  final Function()? onTap;
   final Color backgroundColor;
   final Color? disabledBackgroundColor;
   final Color strokeColor;
@@ -16,7 +17,7 @@ abstract class BaseButtonWidget extends StatelessWidget {
     required this.theme,
     required this.onTap,
     required this.backgroundColor,
-    this.disabledBackgroundColor,
+    required this.disabledBackgroundColor,
     required this.strokeColor,
     required this.textColor,
     required this.text,
@@ -60,4 +61,109 @@ abstract class BaseButtonWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class BigButtonWidget extends BaseButtonWidget {
+  const BigButtonWidget({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.backgroundColor,
+    required super.disabledBackgroundColor,
+    required super.strokeColor,
+    required super.textColor,
+    required super.text,
+  });
+
+  @override
+  double get height => 56.h;
+
+  @override
+  double? get width => 335.w;
+
+  @override
+  EdgeInsets get padding => EdgeInsets.all(16.r);
+
+  @override
+  TextStyle get textStyle => theme.styles.title3Semibold17;
+
+  BigButtonWidget.filled({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super(
+         backgroundColor: theme.palette.accent,
+         disabledBackgroundColor: theme.palette.accentInactive,
+         strokeColor: Colors.transparent,
+         textColor: theme.palette.white,
+       );
+
+  BigButtonWidget.outlined({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super(
+         backgroundColor: Colors.transparent,
+         disabledBackgroundColor: Colors.transparent,
+         strokeColor: theme.palette.accent,
+         textColor: theme.palette.accent,
+       );
+
+  BigButtonWidget.simple({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super(
+         backgroundColor: theme.palette.inputBackground,
+         disabledBackgroundColor: Colors.transparent,
+         strokeColor: Colors.transparent,
+         textColor: theme.palette.black,
+       );
+
+  static Story get story => Story(
+    name: "BigButtonWidget",
+    builder: (BuildContext context) {
+      var theme = CustomTheme.of(context);
+
+      void onTap() {
+        debugPrint("BigButtonWidget");
+      }
+
+      String text = context.knobs.text(label: "Text", initial: "Подтвердить");
+      int type = context.knobs.options(
+        label: "Type",
+        initial: 0,
+        options: [
+          Option(label: "Filled", value: 0),
+          Option(label: "Outlined", value: 1),
+          Option(label: "Simple", value: 2),
+        ],
+      );
+      bool active = context.knobs.boolean(label: "Active", initial: true);
+
+      switch (type) {
+        case 0:
+          return BigButtonWidget.filled(
+            theme: theme,
+            onTap: active ? onTap : null,
+            text: text,
+          );
+        case 1:
+          return BigButtonWidget.outlined(
+            theme: theme,
+            onTap: active ? onTap : null,
+            text: text,
+          );
+        case _:
+          return BigButtonWidget.simple(
+            theme: theme,
+            onTap: active ? onTap : null,
+            text: text,
+          );
+      }
+    },
+  );
 }

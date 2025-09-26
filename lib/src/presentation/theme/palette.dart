@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 abstract class Palette {
   abstract Color backgroundColor;
   abstract Color foregroundColor;
+  abstract Color accent;
+  abstract Color accentInactive;
+  abstract Color black;
+  abstract Color white;
+  abstract Color inputBackground;
 }
 
 class DarkPalette extends Palette {
@@ -11,6 +16,21 @@ class DarkPalette extends Palette {
 
   @override
   Color foregroundColor = Colors.white;
+
+  @override
+  Color accent = Color(0xFF1A6FEE);
+
+  @override
+  Color accentInactive = Color(0xFFC9D4FB);
+
+  @override
+  Color black = Colors.black;
+
+  @override
+  Color inputBackground = Color(0xFFF5F5F9);
+
+  @override
+  Color white = Colors.white;
 }
 
 class LightPalette extends Palette {
@@ -19,4 +39,19 @@ class LightPalette extends Palette {
 
   @override
   Color foregroundColor = Colors.black;
+
+  @override
+  Color accent = Color(0xFF1A6FEE);
+
+  @override
+  Color accentInactive = Color(0xFFC9D4FB);
+
+  @override
+  Color black = Colors.black;
+
+  @override
+  Color inputBackground = Color(0xFFF5F5F9);
+
+  @override
+  Color white = Colors.white;
 }

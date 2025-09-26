@@ -11,13 +11,7 @@ class StorybookApp extends StatelessWidget {
       wrapperBuilder: (BuildContext context, Widget? widget) {
         return MaterialAppWrapper(widget: widget);
       },
-      stories: [
-        Story(
-          name: "TestStory",
-          builder: (BuildContext context) =>
-              FilledButton(onPressed: () {}, child: Text("TestButton")),
-        ),
-      ],
+      stories: [BigButtonWidget.story],
     );
   }
 }
