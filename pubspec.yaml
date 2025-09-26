@@ -34,7 +34,9 @@ dependencies:
   prof_26_uikit:
     git:
       url: https://gitlab.com/diquoks/prof-26-uikit.git
-      ref: 16-09-25
+      ref: 26-09-25
+  storybook_flutter: ^0.14.1
+  flutter_screenutil: ^5.9.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
