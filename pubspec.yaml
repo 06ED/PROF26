@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   storybook_flutter: ^0.14.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
