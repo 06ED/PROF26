@@ -191,8 +191,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "26-09-25"
-      resolved-ref: e75ab7034667ed2b6d3bdf5fc3e34ebed3f226b7
+      ref: "30-09-25"
+      resolved-ref: "89874813c6654a0d5f28dcb663fd94795fa3d1e0"
       url: "https://gitlab.com/diquoks/prof-26-uikit.git"
     source: git
     version: "0.0.1"

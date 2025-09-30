@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = CustomTheme.of(context);
     final text = "Подтвердить";
+    final smallText = "Добавить";
     return Scaffold(
       backgroundColor: theme.palette.backgroundColor,
       resizeToAvoidBottomInset: false,
@@ -23,6 +24,10 @@ class HomePage extends StatelessWidget {
               BigButtonWidget.filled(theme: theme, onTap: null, text: text),
               BigButtonWidget.outlined(theme: theme, onTap: () {}, text: text),
               BigButtonWidget.simple(theme: theme, onTap: () {}, text: text),
+              SmallButtonWidget.filled(theme: theme, onTap: () {}, text: smallText),
+              SmallButtonWidget.filled(theme: theme, onTap: null, text: smallText),
+              SmallButtonWidget.outlined(theme: theme, onTap: () {}, text: smallText),
+              SmallButtonWidget.simple(theme: theme, onTap: () {}, text: smallText),
             ],
           ),
         ),
