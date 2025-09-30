@@ -15,4 +15,11 @@ class Styles {
     height: 24 / 17,
     letterSpacing: 0,
   );
+
+  TextStyle get captionSemibold14 => TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+    height: 20 / 14,
+    letterSpacing: 0,
+  );
 }

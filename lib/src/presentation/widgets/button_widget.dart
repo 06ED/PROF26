@@ -93,11 +93,11 @@ class BigButtonWidget extends BaseButtonWidget {
     required super.onTap,
     required super.text,
   }) : super(
-         backgroundColor: theme.palette.accent,
-         disabledBackgroundColor: theme.palette.accentInactive,
-         strokeColor: Colors.transparent,
-         textColor: theme.palette.white,
-       );
+    backgroundColor: theme.palette.accent,
+    disabledBackgroundColor: theme.palette.accentInactive,
+    strokeColor: Colors.transparent,
+    textColor: theme.palette.white,
+  );
 
   BigButtonWidget.outlined({
     super.key,
@@ -105,11 +105,11 @@ class BigButtonWidget extends BaseButtonWidget {
     required super.onTap,
     required super.text,
   }) : super(
-         backgroundColor: Colors.transparent,
-         disabledBackgroundColor: Colors.transparent,
-         strokeColor: theme.palette.accent,
-         textColor: theme.palette.accent,
-       );
+    backgroundColor: Colors.transparent,
+    disabledBackgroundColor: Colors.transparent,
+    strokeColor: theme.palette.accent,
+    textColor: theme.palette.accent,
+  );
 
   BigButtonWidget.simple({
     super.key,
@@ -117,53 +117,148 @@ class BigButtonWidget extends BaseButtonWidget {
     required super.onTap,
     required super.text,
   }) : super(
-         backgroundColor: theme.palette.inputBackground,
-         disabledBackgroundColor: Colors.transparent,
-         strokeColor: Colors.transparent,
-         textColor: theme.palette.black,
-       );
-
-  static Story get story => Story(
-    name: "BigButtonWidget",
-    builder: (BuildContext context) {
-      var theme = CustomTheme.of(context);
-
-      void onTap() {
-        debugPrint("BigButtonWidget");
-      }
-
-      String text = context.knobs.text(label: "Text", initial: "Подтвердить");
-      int type = context.knobs.options(
-        label: "Type",
-        initial: 0,
-        options: [
-          Option(label: "Filled", value: 0),
-          Option(label: "Outlined", value: 1),
-          Option(label: "Simple", value: 2),
-        ],
-      );
-      bool active = context.knobs.boolean(label: "Active", initial: true);
-
-      switch (type) {
-        case 0:
-          return BigButtonWidget.filled(
-            theme: theme,
-            onTap: active ? onTap : null,
-            text: text,
-          );
-        case 1:
-          return BigButtonWidget.outlined(
-            theme: theme,
-            onTap: active ? onTap : null,
-            text: text,
-          );
-        case _:
-          return BigButtonWidget.simple(
-            theme: theme,
-            onTap: active ? onTap : null,
-            text: text,
-          );
-      }
-    },
+    backgroundColor: theme.palette.inputBackground,
+    disabledBackgroundColor: Colors.transparent,
+    strokeColor: Colors.transparent,
+    textColor: theme.palette.black,
   );
+
+  static Story get story =>
+      Story(
+        name: "BigButtonWidget",
+        builder: (BuildContext context) {
+          var theme = CustomTheme.of(context);
+
+          void onTap() {
+            debugPrint("BigButtonWidget");
+          }
+
+          String text = context.knobs.text(
+              label: "Text", initial: "Подтвердить");
+          int type = context.knobs.options(
+            label: "Type",
+            initial: 0,
+            options: [
+              Option(label: "Filled", value: 0),
+              Option(label: "Outlined", value: 1),
+              Option(label: "Simple", value: 2),
+            ],
+          );
+          bool active = context.knobs.boolean(label: "Active", initial: true);
+
+          switch (type) {
+            case 0:
+              return BigButtonWidget.filled(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+            case 1:
+              return BigButtonWidget.outlined(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+            case _:
+              return BigButtonWidget.simple(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+          }
+        },
+      );
+}
+
+class SmallButtonWidget extends BigButtonWidget {
+  const SmallButtonWidget({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.backgroundColor,
+    required super.disabledBackgroundColor,
+    required super.strokeColor,
+    required super.textColor,
+    required super.text,
+  });
+
+  @override
+  double get height => 40.h;
+
+  @override
+  double? get width => 96.w;
+
+  @override
+  EdgeInsets get padding =>
+      EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h);
+
+  @override
+  TextStyle get textStyle => theme.styles.captionSemibold14;
+
+  SmallButtonWidget.filled({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super.filled();
+
+  SmallButtonWidget.outlined({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super.outlined();
+
+  SmallButtonWidget.simple({
+    super.key,
+    required super.theme,
+    required super.onTap,
+    required super.text,
+  }) : super.simple();
+
+  static Story get story =>
+      Story(
+        name: "SmallButtonWidget",
+        builder: (BuildContext context) {
+          var theme = CustomTheme.of(context);
+
+          void onTap() {
+            debugPrint("SmallButtonWidget");
+          }
+
+          String text = context.knobs.text(
+              label: "Text", initial: "Добавить");
+          int type = context.knobs.options(
+            label: "Type",
+            initial: 0,
+            options: [
+              Option(label: "Filled", value: 0),
+              Option(label: "Outlined", value: 1),
+              Option(label: "Simple", value: 2),
+            ],
+          );
+          bool active = context.knobs.boolean(label: "Active", initial: true);
+
+          switch (type) {
+            case 0:
+              return SmallButtonWidget.filled(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+            case 1:
+              return SmallButtonWidget.outlined(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+            case _:
+              return SmallButtonWidget.simple(
+                theme: theme,
+                onTap: active ? onTap : null,
+                text: text,
+              );
+          }
+        },
+      );
 }
