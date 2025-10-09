@@ -75,15 +75,19 @@ class BigButtonWidget extends BaseButtonWidget {
     required super.text,
   });
 
+  @protected
   @override
   double get height => 56.h;
 
+  @protected
   @override
   double? get width => 335.w;
 
+  @protected
   @override
   EdgeInsets get padding => EdgeInsets.all(16.r);
 
+  @protected
   @override
   TextStyle get textStyle => theme.styles.title3Semibold17;
 
@@ -182,16 +186,20 @@ class SmallButtonWidget extends BigButtonWidget {
     required super.text,
   });
 
+  @protected
   @override
   double get height => 40.h;
 
+  @protected
   @override
   double? get width => 96.w;
 
+  @protected
   @override
   EdgeInsets get padding =>
       EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h);
 
+  @protected
   @override
   TextStyle get textStyle => theme.styles.captionSemibold14;
 
