@@ -8,6 +8,7 @@ abstract class Palette {
   abstract Color black;
   abstract Color white;
   abstract Color inputBackground;
+  abstract Color inputIcon;
 }
 
 class DarkPalette extends Palette {
@@ -28,6 +29,9 @@ class DarkPalette extends Palette {
 
   @override
   Color inputBackground = Color(0xFFF5F5F9);
+
+  @override
+  Color inputIcon = Color(0xFFB8C1CC);
 
   @override
   Color white = Colors.white;
@@ -51,6 +55,9 @@ class LightPalette extends Palette {
 
   @override
   Color inputBackground = Color(0xFFF5F5F9);
+
+  @override
+  Color inputIcon = Color(0xFFB8C1CC);
 
   @override
   Color white = Colors.white;

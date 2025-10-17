@@ -22,4 +22,11 @@ class Styles {
     height: 20 / 14,
     letterSpacing: 0,
   );
+
+  TextStyle get caption2Regular12 => TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+    height: 16 / 12,
+    letterSpacing: 0,
+  );
 }

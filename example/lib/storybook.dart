@@ -11,7 +11,11 @@ class StorybookApp extends StatelessWidget {
       wrapperBuilder: (BuildContext context, Widget? widget) {
         return MaterialAppWrapper(widget: widget);
       },
-      stories: [BigButtonWidget.story, SmallButtonWidget.story],
+      stories: [
+        BigButtonWidget.story,
+        SmallButtonWidget.story,
+        TabbarWidget.story,
+      ],
     );
   }
 }
