@@ -6,9 +6,11 @@ abstract class Palette {
   abstract Color accent;
   abstract Color accentInactive;
   abstract Color black;
+  abstract Color error;
   abstract Color white;
   abstract Color inputBackground;
   abstract Color inputIcon;
+  abstract Color description;
 }
 
 class DarkPalette extends Palette {
@@ -35,6 +37,12 @@ class DarkPalette extends Palette {
 
   @override
   Color white = Colors.white;
+
+  @override
+  Color description = Color(0xFF7E7E9A);
+
+  @override
+  Color error = Colors.red;
 }
 
 class LightPalette extends Palette {
@@ -61,4 +69,10 @@ class LightPalette extends Palette {
 
   @override
   Color white = Colors.white;
+
+  @override
+  Color description = Color(0xFF7E7E9A);
+
+  @override
+  Color error = Colors.red;
 }

@@ -15,6 +15,7 @@ class StorybookApp extends StatelessWidget {
         BigButtonWidget.story,
         SmallButtonWidget.story,
         TabbarWidget.story,
+        InputWidget.story,
       ],
     );
   }

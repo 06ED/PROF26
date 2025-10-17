@@ -29,4 +29,18 @@ class Styles {
     height: 16 / 12,
     letterSpacing: 0,
   );
+
+  TextStyle get captionRegular14 => TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    height: 14 / 20,
+    letterSpacing: 0,
+  );
+
+  TextStyle get textRegular15 => TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 15.sp,
+    height: 15 / 20,
+    letterSpacing: 0,
+  );
 }
