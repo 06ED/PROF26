@@ -34,7 +34,7 @@ dependencies:
   prof_26_uikit:
     git:
       url: https://gitlab.com/diquoks/prof-26-uikit.git
-      ref: 30-09-25
+      ref: 17-10-25
   storybook_flutter: ^0.14.1
   flutter_screenutil: ^5.9.3
 
