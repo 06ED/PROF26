@@ -8,4 +8,9 @@ class Client implements Repository {
 
   @override
   String get baseEndpoint => "https://www.google.com/";
+
+  @override
+  Future<void> getGoogle() async {
+    await _dio.get(baseEndpoint);
+  }
 }
