@@ -13,5 +13,5 @@ abstract interface class Repository {
 
   Future<AuthModel> login({required String email, required String password});
 
-  Future<List<ItemModel>> getItemsList();
+  Future<List<ItemModel>?> getItemsList();
 }

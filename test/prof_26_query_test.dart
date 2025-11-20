@@ -15,7 +15,7 @@ Map<String, String> get baseCredentials => {
 
 BaseUseCase useCase = BaseUseCase();
 
-void onResponse(Object obj, Type expectedType) {
+void onResponse(dynamic obj, Type expectedType) {
   assert(obj.runtimeType == expectedType);
 }
 

@@ -60,9 +60,9 @@ class Client implements Repository {
   }
 
   @override
-  Future<List<ItemModel>> getItemsList() async {
+  Future<List<ItemModel>?> getItemsList() async {
     Response response = await _dio.get("$restURL/items", options: options);
     List json = response.data;
-    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
+    return json.isNotEmpty ? json.map((dynamic element) => ItemModel.fromJSON(element)).toList() : null;
   }
 }

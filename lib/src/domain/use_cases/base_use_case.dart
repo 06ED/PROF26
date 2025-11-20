@@ -34,7 +34,7 @@ class BaseUseCase {
   }
 
   Future<void> getItemsList({
-    required Function(List<ItemModel> items) onResponse,
+    required Function(List<ItemModel>? items) onResponse,
     required Function(String error) onError,
   }) async {
     await _helper.request(
