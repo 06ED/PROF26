@@ -60,9 +60,66 @@ class Client implements Repository {
   }
 
   @override
-  Future<List<ItemModel>?> getItemsList() async {
+  Future<ItemModel?> getItemByID({required int id}) async {
+    Response response = await _dio.get(
+      "$restURL/items",
+      queryParameters: {"id": "eq.$id"},
+      options: options,
+    );
+    List json = response.data;
+    return json.isNotEmpty ? ItemModel.fromJSON(json[0]) : null;
+  }
+
+  @override
+  Future<List<ItemModel>> getItemsList() async {
     Response response = await _dio.get("$restURL/items", options: options);
     List json = response.data;
-    return json.isNotEmpty ? json.map((dynamic element) => ItemModel.fromJSON(element)).toList() : null;
+    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
+  }
+
+  @override
+  Future<List<ItemModel>> searchItemsByTitle({required String search}) async {
+    Response response = await _dio.get(
+      "$restURL/items",
+      queryParameters: {"title": "ilike.*$search*"},
+      options: options,
+    );
+    List json = response.data;
+    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
+  }
+
+  @override
+  Future<List<ItemModel>> searchItemsByDescription({
+    required String search,
+  }) async {
+    Response response = await _dio.get(
+      "$restURL/items",
+      queryParameters: {"description": "ilike.*$search*"},
+      options: options,
+    );
+    List json = response.data;
+    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
+  }
+
+  @override
+  Future<List<ItemModel>> getOrderedByPriceItems() async {
+    Response response = await _dio.get(
+      "$restURL/items",
+      queryParameters: {"order": "price.asc"},
+      options: options,
+    );
+    List json = response.data;
+    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
+  }
+
+  @override
+  Future<List<ItemModel>> getOrderedByCreatedItems() async {
+    Response response = await _dio.get(
+      "$restURL/items",
+      queryParameters: {"order": "created.asc"},
+      options: options,
+    );
+    List json = response.data;
+    return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 }

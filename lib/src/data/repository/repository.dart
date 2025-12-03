@@ -13,5 +13,15 @@ abstract interface class Repository {
 
   Future<AuthModel> login({required String email, required String password});
 
-  Future<List<ItemModel>?> getItemsList();
+  Future<ItemModel?> getItemByID({required int id});
+
+  Future<List<ItemModel>> getItemsList();
+
+  Future<List<ItemModel>> searchItemsByTitle({required String search});
+
+  Future<List<ItemModel>> searchItemsByDescription({required String search});
+
+  Future<List<ItemModel>> getOrderedByPriceItems();
+
+  Future<List<ItemModel>> getOrderedByCreatedItems();
 }

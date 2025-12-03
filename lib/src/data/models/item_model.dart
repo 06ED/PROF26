@@ -3,7 +3,7 @@ class ItemModel {
   final String title;
   final String description;
   final int price;
-  final String created;
+  final DateTime created;
 
   ItemModel({
     required this.id,
@@ -19,6 +19,6 @@ class ItemModel {
         title: json["title"],
         description: json["description"],
         price: json["price"],
-        created: json["created"],
+        created: DateTime.parse(json["created"]),
       );
 }

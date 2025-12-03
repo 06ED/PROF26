@@ -41,8 +41,41 @@ void main() {
         onError: onError,
       );
     });
+    test("GetItemByID", () async {
+      await useCase.getItemByID(
+        id: 1,
+        onResponse: (obj) => onResponse(obj, ItemModel),
+        onError: onError,
+      );
+    });
     test("GetItemsList", () async {
       await useCase.getItemsList(
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
+    test("SearchItemsByTitle", () async {
+      await useCase.searchItemsByTitle(
+        search: "Рубашка",
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
+    test("SearchItemsByDescription", () async {
+      await useCase.searchItemsByDescription(
+        search: "Мягкие носки",
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
+    test("getOrderedByPriceItems", () async {
+      await useCase.getOrderedByPriceItems(
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
+    test("getOrderedByCreatedItems", () async {
+      await useCase.getOrderedByCreatedItems(
         onResponse: (obj) => onResponse(obj, List<ItemModel>),
         onError: onError,
       );
