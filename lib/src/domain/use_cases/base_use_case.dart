@@ -7,35 +7,40 @@ class BaseUseCase {
 
   AuthModel? get lastAuth => _client.lastAuth;
 
-  Future<void> login({
+  Future<void> signup({
     required String email,
     required String password,
-    required Function(AuthModel auth) onResponse,
+    required String passwordConfirm,
+    required Function(void) onResponse,
     required Function(String error) onError,
   }) async {
     await _helper.request(
-      request: () => _client.login(email: email, password: password),
+      request: () => _client.signup(
+        email: email,
+        password: password,
+        passwordConfirm: passwordConfirm,
+      ),
       onResponse: onResponse,
       onError: onError,
     );
   }
 
-  Future<void> signup({
-    required String email,
+  Future<void> login({
+    required String identity,
     required String password,
     required Function(AuthModel auth) onResponse,
     required Function(String error) onError,
   }) async {
     await _helper.request(
-      request: () => _client.signup(email: email, password: password),
+      request: () => _client.login(identity: identity, password: password),
       onResponse: onResponse,
       onError: onError,
     );
   }
 
   Future<void> getItemByID({
-    required int id,
-    required Function(ItemModel? item) onResponse,
+    required String id,
+    required Function(ItemModel item) onResponse,
     required Function(String error) onError,
   }) async {
     await _helper.request(

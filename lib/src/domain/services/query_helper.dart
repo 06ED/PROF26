@@ -18,7 +18,7 @@ class QueryHelper {
     if (e is DioException) {
       if (e.response != null) {
         try {
-          return "${e.response!.data["msg"]} (${e.response!.statusCode})";
+          return "${e.response!.data["message"]} (${e.response!.data["status"]})";
         } on Exception {
           return e.toString();
         }

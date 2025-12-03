@@ -3,14 +3,10 @@ import "package:prof_26_query/prof_26_query.dart";
 
 String testString = DateTime.now().microsecondsSinceEpoch.toString();
 
-Map<String, String> get signUpCredentials => {
+Map<String, String> get credentials => {
   "email": "$testString@yandex.ru",
-  "password": "password",
-};
-
-Map<String, String> get baseCredentials => {
-  "email": "email123@yandex.ru",
-  "password": "password",
+  "password": "password12",
+  "passwordConfirm": "password12",
 };
 
 BaseUseCase useCase = BaseUseCase();
@@ -27,23 +23,24 @@ void main() {
   group("TestQuery", () {
     test("SignUp", () async {
       await useCase.signup(
-        email: signUpCredentials["email"]!,
-        password: signUpCredentials["password"]!,
-        onResponse: (obj) => onResponse(obj, AuthModel),
+        email: credentials["email"]!,
+        password: credentials["password"]!,
+        passwordConfirm: credentials["passwordConfirm"]!,
+        onResponse: (obj) => onResponse,
         onError: onError,
       );
     });
     test("Login", () async {
       await useCase.login(
-        email: baseCredentials["email"]!,
-        password: baseCredentials["password"]!,
+        identity: credentials["email"]!,
+        password: credentials["password"]!,
         onResponse: (obj) => onResponse(obj, AuthModel),
         onError: onError,
       );
     });
     test("GetItemByID", () async {
       await useCase.getItemByID(
-        id: 1,
+        id: "fzplv6paebufyto",
         onResponse: (obj) => onResponse(obj, ItemModel),
         onError: onError,
       );

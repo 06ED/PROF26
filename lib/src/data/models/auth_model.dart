@@ -1,24 +1,7 @@
 class AuthModel {
-  final String accessToken;
-  final String tokenType;
-  final int expiresIn;
-  final int expiresAt;
-  final String refreshToken;
+  final String token;
 
-  AuthModel({
-    required this.accessToken,
-    required this.tokenType,
-    required this.expiresIn,
-    required this.expiresAt,
-    required this.refreshToken,
-  });
+  AuthModel({required this.token});
 
-  AuthModel.fromJSON(Map<String, dynamic> json)
-    : this(
-        accessToken: json["access_token"],
-        tokenType: json["token_type"],
-        expiresIn: json["expires_in"],
-        expiresAt: json["expires_at"],
-        refreshToken: json["refresh_token"],
-      );
+  AuthModel.fromJSON(Map<String, dynamic> json) : this(token: json["token"]);
 }

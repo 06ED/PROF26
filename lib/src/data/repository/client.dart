@@ -10,81 +10,72 @@ class Client implements Repository {
       _storage = storage;
 
   @override
-  String get authURL => "${_storage.apiURL}/auth/v1";
+  String get usersURL => "${_storage.apiURL}/collections/users";
 
   @override
-  String get restURL => "${_storage.apiURL}/rest/v1";
-
-  @override
-  String get apiKey => _storage.apiKey;
+  String get itemsURL => "${_storage.apiURL}/collections/items";
 
   @override
   Options get options => Options(
-    headers: {
-      "apikey": apiKey,
-      if (lastAuth != null)
-        "Authorization": "${lastAuth!.tokenType} ${lastAuth!.accessToken}",
-    },
+    headers: {if (lastAuth != null) "Authorization": lastAuth!.token},
   );
 
   @override
   AuthModel? lastAuth;
 
   @override
-  Future<AuthModel> signup({
+  Future<void> signup({
     required String email,
     required String password,
+    required String passwordConfirm,
   }) async {
-    Response response = await _dio.post(
-      "$authURL/signup",
-      data: {"email": email, "password": password},
-      options: options,
+    await _dio.post(
+      "$usersURL/records",
+      data: {
+        "email": email,
+        "password": password,
+        "passwordConfirm": passwordConfirm,
+      },
     );
-    lastAuth = AuthModel.fromJSON(response.data);
-    return lastAuth!;
   }
 
   @override
   Future<AuthModel> login({
-    required String email,
+    required String identity,
     required String password,
   }) async {
     Response response = await _dio.post(
-      "$authURL/token",
-      queryParameters: {"grant_type": "password"},
-      data: {"email": email, "password": password},
-      options: options,
+      "$usersURL/auth-with-password",
+      data: {"identity": identity, "password": password},
     );
     lastAuth = AuthModel.fromJSON(response.data);
     return lastAuth!;
   }
 
   @override
-  Future<ItemModel?> getItemByID({required int id}) async {
+  Future<ItemModel> getItemByID({required String id}) async {
     Response response = await _dio.get(
-      "$restURL/items",
-      queryParameters: {"id": "eq.$id"},
+      "$itemsURL/records/$id",
       options: options,
     );
-    List json = response.data;
-    return json.isNotEmpty ? ItemModel.fromJSON(json[0]) : null;
+    return ItemModel.fromJSON(response.data);
   }
 
   @override
   Future<List<ItemModel>> getItemsList() async {
-    Response response = await _dio.get("$restURL/items", options: options);
-    List json = response.data;
+    Response response = await _dio.get("$itemsURL/records", options: options);
+    List json = response.data["items"];
     return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override
   Future<List<ItemModel>> searchItemsByTitle({required String search}) async {
     Response response = await _dio.get(
-      "$restURL/items",
-      queryParameters: {"title": "ilike.*$search*"},
+      "$itemsURL/records",
+      queryParameters: {"filter": "(title?~\"$search\")"},
       options: options,
     );
-    List json = response.data;
+    List json = response.data["items"];
     return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 
@@ -93,33 +84,33 @@ class Client implements Repository {
     required String search,
   }) async {
     Response response = await _dio.get(
-      "$restURL/items",
-      queryParameters: {"description": "ilike.*$search*"},
+      "$itemsURL/records",
+      queryParameters: {"filter": "(description?~\"$search\")"},
       options: options,
     );
-    List json = response.data;
+    List json = response.data["items"];
     return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override
   Future<List<ItemModel>> getOrderedByPriceItems() async {
     Response response = await _dio.get(
-      "$restURL/items",
-      queryParameters: {"order": "price.asc"},
+      "$itemsURL/records",
+      queryParameters: {"sort": "+price"},
       options: options,
     );
-    List json = response.data;
+    List json = response.data["items"];
     return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override
   Future<List<ItemModel>> getOrderedByCreatedItems() async {
     Response response = await _dio.get(
-      "$restURL/items",
-      queryParameters: {"order": "created.asc"},
+      "$itemsURL/records",
+      queryParameters: {"sort": "-created"},
       options: options,
     );
-    List json = response.data;
+    List json = response.data["items"];
     return json.map((dynamic element) => ItemModel.fromJSON(element)).toList();
   }
 }
