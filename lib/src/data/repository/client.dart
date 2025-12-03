@@ -116,7 +116,7 @@ class Client implements Repository {
   Future<List<ItemModel>> getOrderedByCreatedItems() async {
     Response response = await _dio.get(
       "$restURL/items",
-      queryParameters: {"order": "created.asc"},
+      queryParameters: {"order": "created.desc"},
       options: options,
     );
     List json = response.data;
