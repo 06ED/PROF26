@@ -20,5 +20,15 @@ void onError(String e) {
 }
 
 void main() {
-  group("TestQuery", () {});
+  group("TestQuery", () {
+    test("SignUp", () async {
+      await useCase.signup(
+        email: credentials["email"]!,
+        password: credentials["password"]!,
+        passwordConfirm: credentials["passwordConfirm"]!,
+        onResponse: (obj) => onResponse,
+        onError: onError,
+      );
+    });
+  });
 }

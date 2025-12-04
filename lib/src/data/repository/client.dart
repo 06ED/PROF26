@@ -10,10 +10,10 @@ class Client implements Repository {
       _storage = storage;
 
   @override
-  String get usersURL => "${_storage.apiURL}/collections/users/";
+  String get usersURL => "${_storage.apiURL}/collections/users";
 
   @override
-  String get itemsURL => "${_storage.apiURL}/collections/items/";
+  String get itemsURL => "${_storage.apiURL}/collections/items";
 
   @override
   Options get options => Options(
@@ -29,8 +29,14 @@ class Client implements Repository {
     required String password,
     required String passwordConfirm,
   }) async {
-    // TODO: implement signup
-    throw UnimplementedError();
+    await _dio.post(
+      "$usersURL/records",
+      data: {
+        "email": email,
+        "password": password,
+        "passwordConfirm": passwordConfirm,
+      },
+    );
   }
 
   @override
