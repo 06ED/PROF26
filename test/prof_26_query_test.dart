@@ -58,5 +58,12 @@ void main() {
         onError: onError,
       );
     });
+    test("SearchItemsByDescription", () async {
+      await useCase.searchItemsByDescription(
+        search: "Превосходная рубашка",
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
   });
 }
