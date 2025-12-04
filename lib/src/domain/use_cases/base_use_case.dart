@@ -24,4 +24,17 @@ class BaseUseCase {
       onError: onError,
     );
   }
+
+  Future<void> login({
+    required String identity,
+    required String password,
+    required Function(AuthModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.login(identity: identity, password: password),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }

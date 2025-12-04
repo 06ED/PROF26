@@ -44,8 +44,12 @@ class Client implements Repository {
     required String identity,
     required String password,
   }) async {
-    // TODO: implement login
-    throw UnimplementedError();
+    Response response = await _dio.post(
+      "$usersURL/auth-with-password",
+      data: {"identity": identity, "password": password},
+    );
+    lastAuth = AuthModel.fromJSON(response.data);
+    return lastAuth!;
   }
 
   @override

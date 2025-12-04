@@ -30,5 +30,13 @@ void main() {
         onError: onError,
       );
     });
+    test("Login", () async {
+      await useCase.login(
+        identity: credentials["email"]!,
+        password: credentials["password"]!,
+        onResponse: (obj) => onResponse(obj, AuthModel),
+        onError: onError,
+      );
+    });
   });
 }
