@@ -37,4 +37,16 @@ class BaseUseCase {
       onError: onError,
     );
   }
+
+  Future<void> getItemByID({
+    required String id,
+    required Function(ItemModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getItemByID(id: id),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }

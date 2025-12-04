@@ -54,8 +54,11 @@ class Client implements Repository {
 
   @override
   Future<ItemModel> getItemByID({required String id}) async {
-    // TODO: implement getItemByID
-    throw UnimplementedError();
+    Response response = await _dio.get(
+      "$itemsURL/records/$id",
+      options: options,
+    );
+    return ItemModel.fromJSON(response.data);
   }
 
   @override

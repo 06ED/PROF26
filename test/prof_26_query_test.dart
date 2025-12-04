@@ -38,5 +38,12 @@ void main() {
         onError: onError,
       );
     });
+    test("GetItemByID", () async {
+      await useCase.getItemByID(
+        id: "lsj4sou4g64vf4k",
+        onResponse: (obj) => onResponse(obj, ItemModel),
+        onError: onError,
+      );
+    });
   });
 }
