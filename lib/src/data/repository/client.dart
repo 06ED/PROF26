@@ -103,7 +103,12 @@ class Client implements Repository {
 
   @override
   Future<List<ItemModel>> getOrderedByCreatedItems() async {
-    // TODO: implement getOrderedByCreatedItems
-    throw UnimplementedError();
+    Response response = await _dio.get(
+      "$itemsURL/records",
+      queryParameters: {"sort": "-created"},
+      options: options,
+    );
+    List json = response.data["items"];
+    return json.map((element) => ItemModel.fromJSON(element)).toList();
   }
 }
