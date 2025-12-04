@@ -49,4 +49,15 @@ class BaseUseCase {
       onError: onError,
     );
   }
+
+  Future<void> getItemsList({
+    required Function(List<ItemModel>) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getItemsList(),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }

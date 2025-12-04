@@ -63,8 +63,9 @@ class Client implements Repository {
 
   @override
   Future<List<ItemModel>> getItemsList() async {
-    // TODO: implement getItemsList
-    throw UnimplementedError();
+    Response response = await _dio.get("$itemsURL/records", options: options);
+    List json = response.data["items"];
+    return json.map((element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override

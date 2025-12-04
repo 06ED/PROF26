@@ -45,5 +45,11 @@ void main() {
         onError: onError,
       );
     });
+    test("GetItemsList", () async {
+      await useCase.getItemsList(
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
   });
 }
