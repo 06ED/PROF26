@@ -92,8 +92,13 @@ class Client implements Repository {
 
   @override
   Future<List<ItemModel>> getOrderedByPriceItems() async {
-    // TODO: implement getOrderedByPriceItems
-    throw UnimplementedError();
+    Response response = await _dio.get(
+      "$itemsURL/records",
+      queryParameters: {"sort": "+price"},
+      options: options,
+    );
+    List json = response.data["items"];
+    return json.map((element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override

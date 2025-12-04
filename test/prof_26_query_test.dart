@@ -65,5 +65,11 @@ void main() {
         onError: onError,
       );
     });
+    test("GetOrderedByPriceItems", () async {
+      await useCase.getOrderedByPriceItems(
+        onResponse: (obj) => onResponse(obj, List<ItemModel>),
+        onError: onError,
+      );
+    });
   });
 }

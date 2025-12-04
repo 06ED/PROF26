@@ -84,4 +84,15 @@ class BaseUseCase {
       onError: onError,
     );
   }
+
+  Future<void> getOrderedByPriceItems({
+    required Function(List<ItemModel>) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getOrderedByPriceItems(),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }
