@@ -70,8 +70,13 @@ class Client implements Repository {
 
   @override
   Future<List<ItemModel>> searchItemsByTitle({required String search}) async {
-    // TODO: implement searchItemsByTitle
-    throw UnimplementedError();
+    Response response = await _dio.get(
+      "$itemsURL/records",
+      queryParameters: {"filter": "(title?~\"$search\")"},
+      options: options,
+    );
+    List json = response.data["items"];
+    return json.map((element) => ItemModel.fromJSON(element)).toList();
   }
 
   @override

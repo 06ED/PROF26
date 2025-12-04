@@ -60,4 +60,16 @@ class BaseUseCase {
       onError: onError,
     );
   }
+
+  Future<void> searchItemsByTitle({
+    required String search,
+    required Function(List<ItemModel>) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.searchItemsByTitle(search: search),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }
