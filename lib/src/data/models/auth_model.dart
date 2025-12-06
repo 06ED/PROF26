@@ -18,7 +18,7 @@ class AuthModel {
         accessToken: json["access_token"],
         tokenType: json["token_type"],
         expiresIn: json["expires_in"],
-        expiresAt: json["expires_in"],
+        expiresAt: json["expires_at"],
         refreshToken: json["refresh_token"],
       );
 }
