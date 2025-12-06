@@ -3,12 +3,12 @@ import 'package:dio/dio.dart';
 class QueryHelper {
   Future<void> request<T>({
     required Future<T> Function() request,
-    required void Function(T) onReponse,
+    required void Function(T) onResponse,
     required void Function(String) onError,
   }) async {
     try {
       T response = await request();
-      onReponse(response);
+      onResponse(response);
     } on Exception catch (e) {
       onError(castError(e));
     }

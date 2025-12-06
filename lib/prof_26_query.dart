@@ -6,3 +6,5 @@ export "src/data/repository/repository.dart";
 export "src/data/storage/storage.dart";
 
 export "src/domain/services/query_helper.dart";
+
+export "src/domain/use_cases/base_use_case.dart";
