@@ -2,17 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:open_router_query/open_router_query.dart';
 
 class Client implements Repository {
-  @override
-  final String apiKey;
   final Dio _dio;
   final Storage _storage;
 
-  Client({required this.apiKey, required Dio dio, required Storage storage})
+  Client({required Dio dio, required Storage storage})
     : _dio = dio,
       _storage = storage;
 
   @override
-  Options get options => Options(headers: {"Authorization": "Bearer $apiKey"});
+  Options get options =>
+      Options(headers: {"Authorization": "Bearer ${_storage.apiKey}"});
 
   @override
   Future<List<AIModel>> getAIModelsList() async {
@@ -22,7 +21,7 @@ class Client implements Repository {
   }
 
   @override
-  Future<String> doRequest({
+  Future<String> getCompletion({
     required String content,
     String model = "openrouter/auto",
   }) async {

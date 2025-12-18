@@ -7,4 +7,4 @@ export 'src/data/storage/storage.dart';
 
 export 'src/domain/services/query_helper.dart';
 
-export 'src/domain/use_cases/base_use_case.dart';
+export 'src/domain/use_cases/query_use_case.dart';
