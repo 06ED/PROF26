@@ -20,13 +20,16 @@ void main() {
       await _queryUseCase.getAIModelsList(
         onResponse: (obj) => onResponse(obj, List<AIModel>),
         onError: onError,
+        useShortError: false,
       );
     });
     test("GetCompletion", () async {
       await _queryUseCase.getCompletion(
         content: "TestContent",
+        model: "openrouter/auto",
         onResponse: (obj) => onResponse(obj, String),
         onError: onError,
+        useShortError: false,
       );
     });
   });

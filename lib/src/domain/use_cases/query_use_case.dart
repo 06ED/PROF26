@@ -8,23 +8,28 @@ class QueryUseCase {
   Future<void> getAIModelsList({
     required void Function(List<AIModel>) onResponse,
     required void Function(String) onError,
+    bool useShortError = true,
   }) async {
     await _helper.request(
       request: _client.getAIModelsList,
       onResponse: onResponse,
       onError: onError,
+      useShortError: useShortError,
     );
   }
 
   Future<void> getCompletion({
     required String content,
+    required String model,
     required void Function(String) onResponse,
     required void Function(String) onError,
+    bool useShortError = true,
   }) async {
     await _helper.request(
-      request: () => _client.getCompletion(content: content),
+      request: () => _client.getCompletion(content: content, model: model),
       onResponse: onResponse,
       onError: onError,
+      useShortError: useShortError,
     );
   }
 }

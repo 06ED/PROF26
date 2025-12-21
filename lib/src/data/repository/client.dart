@@ -16,14 +16,13 @@ class Client implements Repository {
   @override
   Future<List<AIModel>> getAIModelsList() async {
     Response response = await _dio.get("${_storage.apiURL}/models");
-    List json = response.data["data"];
-    return json.map((e) => AIModel.fromJSON(e)).toList();
+    return AIModel.fromListJSON(response.data["data"]);
   }
 
   @override
   Future<String> getCompletion({
     required String content,
-    String model = "openrouter/auto",
+    required String model,
   }) async {
     Response response = await _dio.post(
       "${_storage.apiURL}/chat/completions",

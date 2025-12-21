@@ -8,6 +8,6 @@ abstract interface class Repository {
 
   Future<String> getCompletion({
     required String content,
-    String model = "openrouter/auto",
+    required String model,
   });
 }
