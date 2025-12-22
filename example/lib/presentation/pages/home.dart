@@ -46,13 +46,13 @@ class _HomePageState extends State<HomePage> {
     await widget._queryUseCase.getCompletion(
       content: _textFieldController.text,
       model: currentModel.id,
-      onResponse: (String responseText) {
+      onResponse: (responseText) {
         setState(() {
           _errorText = null;
           _completionText = responseText;
         });
       },
-      onError: (String errorText) {
+      onError: (errorText) {
         setState(() {
           _errorText = errorText;
           _completionText = null;
@@ -68,73 +68,73 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.only(top: 36),
+          padding: .symmetric(vertical: 24),
           child: Center(child: Text("OpenRouterQuery")),
         ),
+        surfaceTintColor: Colors.black,
         backgroundColor: Colors.black,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-        child: Column(
-          mainAxisAlignment: .center,
-          spacing: 24,
-          children: [
-            if (_errorText != null)
-              Text(
-                "An error occurred: ${_errorText!}",
-                style: TextStyle(color: Colors.red),
-              ),
-            TextField(
-              onChanged: (_) {
-                setState(() {});
-              },
-              controller: _textFieldController,
-              decoration: InputDecoration(
-                labelText: "Your request",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            DropdownSearch<AIModel>(
-              key: _modelsDropdownKey,
-              items: (filter, infiniteScrollProps) => _getAIModelsList(),
-              itemAsString: (item) => item.toString(),
-              compareFn: (firstItem, secondItem) =>
-                  firstItem.isEqual(secondItem),
-              popupProps: PopupProps.menu(
-                fit: FlexFit.loose,
-                showSearchBox: true,
-                searchFieldProps: TextFieldProps(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: .all(24),
+            child: Column(
+              spacing: 24,
+              children: [
+                if (_errorText != null)
+                  Text(
+                    "An error occurred: ${_errorText!}",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                TextField(
+                  onChanged: (_) => setState(() {}),
+                  controller: _textFieldController,
                   decoration: InputDecoration(
-                    labelText: "Search",
+                    labelText: "Your request",
                     border: OutlineInputBorder(),
                   ),
                 ),
-              ),
-              onChanged: (_) {
-                setState(() {});
-              },
-              decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: "AI Model",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton(
-                    onPressed: _getCompletionValidation()
-                        ? _getCompletion
-                        : null,
-                    child: Text("Get completion"),
+                DropdownSearch<AIModel>(
+                  key: _modelsDropdownKey,
+                  items: (_, _) => _getAIModelsList(),
+                  itemAsString: (item) => item.toString(),
+                  compareFn: (firstItem, secondItem) =>
+                      firstItem.isEqual(secondItem),
+                  popupProps: PopupProps.menu(
+                    fit: FlexFit.loose,
+                    showSearchBox: true,
+                    searchFieldProps: TextFieldProps(
+                      decoration: InputDecoration(
+                        labelText: "Search",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  onChanged: (_) => setState(() {}),
+                  decoratorProps: DropDownDecoratorProps(
+                    decoration: InputDecoration(
+                      labelText: "AI Model",
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: _getCompletionValidation()
+                            ? _getCompletion
+                            : null,
+                        child: Text("Get completion"),
+                      ),
+                    ),
+                  ],
+                ),
+                if (_completionText != null)
+                  Text(_completionText!, style: TextStyle(color: Colors.white)),
               ],
             ),
-            if (_completionText != null)
-              Text(_completionText!, style: TextStyle(color: Colors.white)),
-          ],
+          ),
         ),
       ),
     );
