@@ -25,13 +25,16 @@ class MaterialAppWrapper extends StatelessWidget {
             return Scaffold(
               backgroundColor: theme.palette.background,
               resizeToAvoidBottomInset: false,
-              body: Center(
-                child:
-                    widget ??
-                    CircularProgressIndicator(
-                      backgroundColor: Colors.transparent,
-                      color: theme.palette.accent,
-                    ),
+              body: Padding(
+                padding: .symmetric(horizontal: 16.w, vertical: 32.h),
+                child: Center(
+                  child:
+                      widget ??
+                      CircularProgressIndicator(
+                        backgroundColor: Colors.transparent,
+                        color: theme.palette.accent,
+                      ),
+                ),
               ),
             );
           },

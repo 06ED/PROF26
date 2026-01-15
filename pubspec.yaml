@@ -9,8 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  storybook_flutter: ^0.14.1
   flutter_screenutil: ^5.9.3
   google_fonts: ^7.0.2
+  flutter_svg: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +23,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
