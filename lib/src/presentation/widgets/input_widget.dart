@@ -10,6 +10,7 @@ class CustomInputWidget extends StatefulWidget {
   final String error;
   final TextEditingController controller;
   final bool isPassword;
+  final Function()? onChanged;
 
   const CustomInputWidget({
     super.key,
@@ -18,6 +19,7 @@ class CustomInputWidget extends StatefulWidget {
     required this.error,
     required this.controller,
     this.isPassword = false,
+    this.onChanged,
   });
 
   @override
@@ -77,6 +79,7 @@ class _CustomInputWidgetState extends State<CustomInputWidget> {
           cursorWidth: 2.w,
           cursorHeight: 20.h,
           controller: widget.controller,
+          onChanged: (_) => widget.onChanged,
           style: theme.styles.nunitoRegular12,
           decoration: InputDecoration(
             filled: true,
