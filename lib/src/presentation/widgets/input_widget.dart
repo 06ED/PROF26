@@ -2,7 +2,6 @@ import 'package:ai_notes_uikit/ai_notes_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class InputWidget extends StatefulWidget {
@@ -67,10 +66,8 @@ class _InputWidgetState extends State<InputWidget> {
         if (widget.label.isNotEmpty)
           Text(
             widget.label,
-            style: GoogleFonts.nunito(
-              fontWeight: .w400,
-              fontSize: 14.sp,
-              color: theme.palette.text,
+            style: theme.styles.nunitoMedium14.copyWith(
+              color: theme.palette.textSecondary,
             ),
           ),
         TextField(
@@ -80,20 +77,14 @@ class _InputWidgetState extends State<InputWidget> {
           cursorWidth: 2.w,
           cursorHeight: 20.h,
           controller: widget.controller,
-          style: GoogleFonts.nunito(
-            fontWeight: .w400,
-            fontSize: 12.sp,
-            color: theme.palette.text,
-          ),
+          style: theme.styles.nunitoRegular12,
           decoration: InputDecoration(
             filled: true,
             fillColor: widget.error.isNotEmpty
                 ? theme.palette.error.withAlpha(0x4D)
                 : theme.palette.block,
             hintText: widget.hint,
-            hintStyle: GoogleFonts.nunito(
-              fontWeight: .w400,
-              fontSize: 12.sp,
+            hintStyle: theme.styles.nunitoRegular12.copyWith(
               color: theme.palette.hint,
             ),
             enabledBorder: OutlineInputBorder(
@@ -133,9 +124,7 @@ class _InputWidgetState extends State<InputWidget> {
         if (widget.error.isNotEmpty)
           Text(
             widget.error,
-            style: GoogleFonts.nunito(
-              fontWeight: .w400,
-              fontSize: 12.sp,
+            style: theme.styles.nunitoRegular12.copyWith(
               color: theme.palette.error,
             ),
           ),
