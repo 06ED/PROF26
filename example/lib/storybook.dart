@@ -9,7 +9,7 @@ class StorybookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Storybook(
       wrapperBuilder: (_, widget) => MaterialAppWrapper(widget: widget),
-      stories: [InputWidget.story],
+      stories: [CustomInputWidget.story],
     );
   }
 }

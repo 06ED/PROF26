@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class InputWidget extends StatefulWidget {
+class CustomInputWidget extends StatefulWidget {
   final String label;
   final String hint;
   final String error;
   final TextEditingController controller;
   final bool isPassword;
 
-  const InputWidget({
+  const CustomInputWidget({
     super.key,
     required this.label,
     required this.hint,
@@ -21,7 +21,7 @@ class InputWidget extends StatefulWidget {
   });
 
   @override
-  State<InputWidget> createState() => _InputWidgetState();
+  State<CustomInputWidget> createState() => _CustomInputWidgetState();
 
   static Story get story => Story(
     name: "InputWidget",
@@ -35,7 +35,7 @@ class InputWidget extends StatefulWidget {
         initial: true,
       );
 
-      return InputWidget(
+      return CustomInputWidget(
         label: label,
         hint: hint,
         error: error,
@@ -46,7 +46,7 @@ class InputWidget extends StatefulWidget {
   );
 }
 
-class _InputWidgetState extends State<InputWidget> {
+class _CustomInputWidgetState extends State<CustomInputWidget> {
   var _isObscured = true;
 
   void _switchObscure() {
