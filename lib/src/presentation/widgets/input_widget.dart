@@ -24,7 +24,7 @@ class CustomInputWidget extends StatefulWidget {
   State<CustomInputWidget> createState() => _CustomInputWidgetState();
 
   static Story get story => Story(
-    name: "InputWidget",
+    name: "CustomInputWidget",
     builder: (BuildContext context) {
       var label = context.knobs.text(label: "Label", initial: "Пароль");
       var hint = context.knobs.text(label: "Hint", initial: "********");
