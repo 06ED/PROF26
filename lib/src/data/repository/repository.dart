@@ -2,4 +2,16 @@ import 'package:ai_notes_query/ai_notes_query.dart';
 
 abstract interface class Repository {
   AuthModel? get lastAuth;
+
+  Future<UserModel> signup({
+    required String email,
+    required String password,
+    required String passwordConfirm,
+  });
+
+  Future<AuthModel> login({required String identity, required String password});
+
+  Future<void> logout();
+
+  Future<UserModel> getUser({required String id});
 }

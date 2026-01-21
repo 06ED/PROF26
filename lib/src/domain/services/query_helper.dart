@@ -24,9 +24,9 @@ class QueryHelper {
     }
 
     try {
-      return "${e.response!.data["message"]} (HTTP ${e.response!.statusCode})";
+      return "${e.response!.data["message"]} (HTTP ${e.response!.statusCode})\n${e.response!.data["data"]}";
     } on Exception {
-      return e.toString();
+      return "HTTP ${e.response!.statusCode}\n${e.response!.data}";
     }
   }
 }
