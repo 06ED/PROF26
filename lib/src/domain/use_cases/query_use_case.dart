@@ -62,4 +62,69 @@ class QueryUseCase {
       onError: onError,
     );
   }
+
+  Future<void> createNote({
+    required String userId,
+    required String name,
+    required String text,
+    required void Function(NoteModel) onResponse,
+    required void Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.createNote(userId: userId, name: name, text: text),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> getNote({
+    required String id,
+    required void Function(NoteModel) onResponse,
+    required void Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getNote(id: id),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> getNotesList({
+    required void Function(List<NoteModel>) onResponse,
+    required void Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: _client.getNotesList,
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> updateNote({
+    required String id,
+    required String userId,
+    required String name,
+    required String text,
+    required void Function(NoteModel) onResponse,
+    required void Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () =>
+          _client.updateNote(id: id, userId: userId, name: name, text: text),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> deleteNote({
+    required String id,
+    required void Function(void) onResponse,
+    required void Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.deleteNote(id: id),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }

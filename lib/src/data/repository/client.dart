@@ -10,6 +10,8 @@ class Client implements Repository {
 
   String get _usersURL => "/collections/users";
 
+  String get _notesURL => "/collections/notes";
+
   @override
   AuthModel? get lastAuth => _lastAuth;
 
@@ -60,5 +62,55 @@ class Client implements Repository {
     var response = await _dio.get("$_usersURL/records/$id", options: _options);
 
     return UserModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<NoteModel> createNote({
+    required String userId,
+    required String name,
+    required String text,
+  }) async {
+    var response = await _dio.post(
+      "$_notesURL/records",
+      data: {"userId": userId, "name": name, "text": text},
+      options: _options,
+    );
+
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<NoteModel> getNote({required String id}) async {
+    var response = await _dio.get("$_notesURL/records/$id", options: _options);
+
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<List<NoteModel>> getNotesList() async {
+    var response = await _dio.get("$_notesURL/records", options: _options);
+
+    return NoteModel.fromJSONList(response.data["items"]);
+  }
+
+  @override
+  Future<NoteModel> updateNote({
+    required String id,
+    required String userId,
+    required String name,
+    required String text,
+  }) async {
+    var response = await _dio.patch(
+      "$_notesURL/records/$id",
+      data: {"userId": userId, "name": name, "text": text},
+      options: _options,
+    );
+
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<void> deleteNote({required String id}) async {
+    await _dio.delete("$_notesURL/records/$id", options: _options);
   }
 }

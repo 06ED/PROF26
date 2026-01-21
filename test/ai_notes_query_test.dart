@@ -20,6 +20,8 @@ void onResponse(dynamic obj, Type expectedType) {
 void onError(String e) => fail(e);
 
 void main() {
+  late NoteModel noteModel;
+
   group("TestQuery", () {
     test("signup", () async {
       await _useCase.signup(
@@ -42,6 +44,49 @@ void main() {
       await _useCase.getUser(
         id: _useCase.lastAuth!.record.id,
         onResponse: (obj) => onResponse(obj, UserModel),
+        onError: onError,
+      );
+    });
+    test("createNote", () async {
+      await _useCase.createNote(
+        userId: _useCase.lastAuth!.record.id,
+        name: "Sample Note",
+        text: "Some text...",
+        onResponse: (obj) {
+          onResponse(obj, NoteModel);
+
+          noteModel = obj;
+        },
+        onError: onError,
+      );
+    });
+    test("getNote", () async {
+      await _useCase.getNote(
+        id: noteModel.id,
+        onResponse: (obj) => onResponse(obj, NoteModel),
+        onError: onError,
+      );
+    });
+    test("getNotesList", () async {
+      await _useCase.getNotesList(
+        onResponse: (obj) => onResponse(obj, List<NoteModel>),
+        onError: onError,
+      );
+    });
+    test("updateNote", () async {
+      await _useCase.updateNote(
+        id: noteModel.id,
+        userId: _useCase.lastAuth!.record.id,
+        name: noteModel.name,
+        text: "Some updated text...",
+        onResponse: (obj) => onResponse(obj, NoteModel),
+        onError: onError,
+      );
+    });
+    test("deleteNote", () async {
+      await _useCase.deleteNote(
+        id: noteModel.id,
+        onResponse: (_) {},
         onError: onError,
       );
     });

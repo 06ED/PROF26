@@ -27,7 +27,7 @@ class NoteModel extends BaseModel {
         updated: DateTime.parse(json["updated"]),
       );
 
-  static List<NoteModel> fromJSONList(List<Map<String, dynamic>> list) =>
+  static List<NoteModel> fromJSONList(List list) =>
       list.map((element) => NoteModel.fromJSON(element)).toList();
 
   @override

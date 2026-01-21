@@ -14,4 +14,23 @@ abstract interface class Repository {
   Future<void> logout();
 
   Future<UserModel> getUser({required String id});
+
+  Future<NoteModel> createNote({
+    required String userId,
+    required String name,
+    required String text,
+  });
+
+  Future<NoteModel> getNote({required String id});
+
+  Future<List<NoteModel>> getNotesList();
+
+  Future<NoteModel> updateNote({
+    required String id,
+    required String userId,
+    required String name,
+    required String text,
+  });
+
+  Future<void> deleteNote({required String id});
 }
