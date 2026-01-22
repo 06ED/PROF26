@@ -20,7 +20,7 @@ class MaterialAppWrapper extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: Builder(
-          builder: (BuildContext context) {
+          builder: (context) {
             var theme = CustomTheme.of(context);
 
             return Scaffold(

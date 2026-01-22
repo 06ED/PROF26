@@ -25,7 +25,7 @@ class CustomTextField extends StatefulWidget {
 
   static Story get story => .new(
     name: "CustomTextField",
-    builder: (BuildContext context) {
+    builder: (context) {
       String label = context.knobs.text(label: "Label", initial: "Пароль");
       String hint = context.knobs.text(label: "Hint", initial: "********");
       String error = context.knobs.text(

@@ -103,7 +103,7 @@ class CustomFilledButton extends CustomBaseButton {
 
   static Story get story => .new(
     name: "CustomFilledButton",
-    builder: (BuildContext context) {
+    builder: (context) {
       var theme = CustomTheme.of(context);
 
       void onPressed() {
