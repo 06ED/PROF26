@@ -17,76 +17,76 @@ abstract class Palette {
 
 class DarkPalette extends Palette {
   @override
-  Color get accent => Color(0xFF7193F0);
+  Color get accent => .new(0xFF7193F0);
 
   @override
-  Color get background => Color(0xFF121318);
+  Color get background => .new(0xFF121318);
 
   @override
-  Color get black => Color(0xFF000000);
+  Color get black => .new(0xFF000000);
 
   @override
-  Color get block => Color(0xFF2A2E38);
+  Color get block => .new(0xFF2A2E38);
 
   @override
-  Color get border => Color(0xFF3A3F4C);
+  Color get border => .new(0xFF3A3F4C);
 
   @override
-  Color get button => Color(0xFFDE7C3E);
+  Color get button => .new(0xFFDE7C3E);
 
   @override
-  Color get buttonInactive => Color(0xFFCD7B45);
+  Color get buttonInactive => .new(0xFFCD7B45);
 
   @override
-  Color get error => Color(0xFFF27872);
+  Color get error => .new(0xFFF27872);
 
   @override
-  Color get hint => Color(0xFF7E8491);
+  Color get hint => .new(0xFF7E8491);
 
   @override
-  Color get icon => Color(0xFFF6F7FB);
+  Color get icon => .new(0xFFF6F7FB);
 
   @override
-  Color get text => Color(0xFFC8CDDE);
+  Color get text => .new(0xFFC8CDDE);
 
   @override
-  Color get textSecondary => Color(0xFFB4BAC6);
+  Color get textSecondary => .new(0xFFB4BAC6);
 }
 
 class LightPalette extends Palette {
   @override
-  Color get accent => Color(0xFF4A77D9);
+  Color get accent => .new(0xFF4A77D9);
 
   @override
-  Color get background => Color(0xFFF9F6EC);
+  Color get background => .new(0xFFF9F6EC);
 
   @override
-  Color get black => Color(0xFFFFFFFF);
+  Color get black => .new(0xFFFFFFFF);
 
   @override
-  Color get block => Color(0xFFFFEFD9);
+  Color get block => .new(0xFFFFEFD9);
 
   @override
-  Color get border => Color(0xFFCBB89F);
+  Color get border => .new(0xFFCBB89F);
 
   @override
-  Color get button => Color(0xFFFF9C5A);
+  Color get button => .new(0xFFFF9C5A);
 
   @override
-  Color get buttonInactive => Color(0xFFA55C2E);
+  Color get buttonInactive => .new(0xFFA55C2E);
 
   @override
-  Color get error => Color(0xFFE06355);
+  Color get error => .new(0xFFE06355);
 
   @override
-  Color get hint => Color(0xFFB1A79C);
+  Color get hint => .new(0xFFB1A79C);
 
   @override
-  Color get icon => Color(0xFF23201C);
+  Color get icon => .new(0xFF23201C);
 
   @override
-  Color get text => Color(0xFF433E36);
+  Color get text => .new(0xFF433E36);
 
   @override
-  Color get textSecondary => Color(0xFF7A726A);
+  Color get textSecondary => .new(0xFF7A726A);
 }
