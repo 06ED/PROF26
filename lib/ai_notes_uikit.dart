@@ -3,4 +3,5 @@ export 'src/presentation/theme/palette.dart';
 export 'src/presentation/theme/styles.dart';
 
 export 'src/presentation/widgets/custom_button.dart';
+export 'src/presentation/widgets/custom_text_field.dart';
 export 'src/presentation/widgets/utils.dart';
