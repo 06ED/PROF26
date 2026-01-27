@@ -15,9 +15,8 @@ class Client implements Repository {
   @override
   AuthModel? get lastAuth => _lastAuth;
 
-  Options get _options => Options(
-    headers: {if (_lastAuth != null) "Authorization": _lastAuth!.token},
-  );
+  Options get _options =>
+      .new(headers: {if (_lastAuth != null) "Authorization": _lastAuth!.token});
 
   @override
   Future<UserModel> signup({
@@ -35,7 +34,7 @@ class Client implements Repository {
       },
     );
 
-    return UserModel.fromJSON(response.data);
+    return .fromJSON(response.data);
   }
 
   @override
@@ -48,7 +47,7 @@ class Client implements Repository {
       data: {"identity": identity, "password": password},
     );
 
-    _lastAuth = AuthModel.fromJSON(response.data);
+    _lastAuth = .fromJSON(response.data);
     return _lastAuth!;
   }
 
@@ -61,7 +60,7 @@ class Client implements Repository {
   Future<UserModel> getUser({required String id}) async {
     var response = await _dio.get("$_usersURL/records/$id", options: _options);
 
-    return UserModel.fromJSON(response.data);
+    return .fromJSON(response.data);
   }
 
   @override
@@ -76,14 +75,14 @@ class Client implements Repository {
       options: _options,
     );
 
-    return NoteModel.fromJSON(response.data);
+    return .fromJSON(response.data);
   }
 
   @override
   Future<NoteModel> getNote({required String id}) async {
     var response = await _dio.get("$_notesURL/records/$id", options: _options);
 
-    return NoteModel.fromJSON(response.data);
+    return .fromJSON(response.data);
   }
 
   @override
@@ -106,7 +105,7 @@ class Client implements Repository {
       options: _options,
     );
 
-    return NoteModel.fromJSON(response.data);
+    return .fromJSON(response.data);
   }
 
   @override

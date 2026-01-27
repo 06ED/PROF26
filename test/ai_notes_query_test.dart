@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:ai_notes_query/ai_notes_query.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final _useCase = QueryUseCase(
-  dio: Dio(.new(baseUrl: "http://127.0.0.1:8090/api")),
+  dio: .new(.new(baseUrl: "http://188.127.227.228:8080/api")),
 );
 
-final String email = "${DateTime.now().microsecondsSinceEpoch}@ya.ru";
-final String password = r"Pa$$w0rd";
+final email = "${DateTime.now().microsecondsSinceEpoch}@ya.ru";
+final password = r"Pa$$w0rd";
 
 void onResponse(dynamic obj, Type expectedType) {
   stdout.writeln(obj.toString());

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
 class QueryHelper {
-  Future<void> request<T>({
+  static Future<void> request<T>({
     required Future<T> Function() request,
-    required void Function(T) onResponse,
-    required void Function(String) onError,
+    required Function(T) onResponse,
+    required Function(String) onError,
   }) async {
     try {
       T response = await request();
@@ -14,7 +14,7 @@ class QueryHelper {
     }
   }
 
-  String castError(Exception e) {
+  static String castError(Exception e) {
     if (e is! DioException) {
       return e.toString();
     }
@@ -24,9 +24,9 @@ class QueryHelper {
     }
 
     try {
-      return "${e.response!.data["message"]} (HTTP ${e.response!.statusCode})\n${e.response!.data["data"]}";
+      return "${e.response!.data["message"]} (${e.response!.statusCode})";
     } on Exception {
-      return "HTTP ${e.response!.statusCode}\n${e.response!.data}";
+      return e.response!.statusCode.toString();
     }
   }
 }
