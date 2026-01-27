@@ -8,5 +8,5 @@ class ValidationService {
   static bool validatePasswordsEquality(
     String password,
     String passwordConfirm,
-  ) => password == passwordConfirm;
+  ) => passwordConfirm.isNotEmpty && password == passwordConfirm;
 }

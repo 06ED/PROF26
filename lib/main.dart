@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 var mainUseCase = QueryUseCase(
-  dio: Dio(.new(baseUrl: "http://10.0.2.2:8090/api")),
+  dio: Dio(.new(baseUrl: "http://188.127.227.228:8080/api")),
 );
 
 void main() {
