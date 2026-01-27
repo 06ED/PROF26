@@ -1,9 +1,11 @@
 import 'package:ai_notes_app/domain/services/validation_service.dart';
 import 'package:ai_notes_app/main.dart';
+import 'package:ai_notes_app/presentation/pages/home_page.dart';
 import 'package:ai_notes_app/presentation/widgets/utils.dart';
 import 'package:ai_notes_uikit/ai_notes_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -54,13 +56,8 @@ class _LoginPageState extends State<LoginPage> {
     await mainUseCase.login(
       identity: emailController.text,
       password: passwordController.text,
-      onResponse: (_) {
-        // TODO: переход на HomePage
-        throw UnimplementedError();
-      },
-      onError: (error) {
-        showError(error);
-      },
+      onResponse: (_) => Get.offAll(HomePage()),
+      onError: (error) => showError(error),
     );
   }
 
