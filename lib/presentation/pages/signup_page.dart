@@ -1,28 +1,30 @@
 import 'package:ai_notes_app/domain/services/validation_service.dart';
 import 'package:ai_notes_app/main.dart';
 import 'package:ai_notes_app/presentation/pages/home_page.dart';
-import 'package:ai_notes_app/presentation/pages/signup_page.dart';
+import 'package:ai_notes_app/presentation/pages/login_page.dart';
 import 'package:ai_notes_app/presentation/widgets/utils.dart';
 import 'package:ai_notes_uikit/ai_notes_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  var loginValidation = false;
+class _SignupPageState extends State<SignupPage> {
+  var signupValidation = false;
 
   String? emailError;
   String? passwordError;
+  String? passwordConfirmError;
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var passwordConfirmController = TextEditingController();
 
   void processEmailValidation() {
     setState(() {
@@ -31,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           : "Введите корректный e-mail!";
     });
 
-    processLoginValidation();
+    processSignupValidation();
   }
 
   void processPasswordValidation() {
@@ -42,27 +44,51 @@ class _LoginPageState extends State<LoginPage> {
           : "Введите корректный пароль!";
     });
 
-    processLoginValidation();
+    processSignupValidation();
   }
 
-  void processLoginValidation() {
+  void processPasswordConfirmValidation() {
     setState(() {
-      loginValidation =
+      passwordConfirmError =
+          ValidationService.validatePasswordsEquality(
+            passwordController.text,
+            passwordConfirmController.text,
+          )
+          ? null
+          : "Пароли не совпадают!";
+    });
+
+    processSignupValidation();
+  }
+
+  void processSignupValidation() {
+    setState(() {
+      signupValidation =
           ValidationService.validateEmail(emailController.text) &&
-          ValidationService.validatePassword(passwordController.text);
+          ValidationService.validatePassword(passwordController.text) &&
+          ValidationService.validatePasswordsEquality(
+            passwordController.text,
+            passwordConfirmController.text,
+          );
     });
   }
 
-  void processLogin() async {
-    await mainUseCase.login(
-      identity: emailController.text,
+  void processSignup() async {
+    await mainUseCase.signup(
+      email: emailController.text,
       password: passwordController.text,
-      onResponse: (_) => Get.offAll(HomePage()),
+      passwordConfirm: passwordConfirmController.text,
+      onResponse: (_) async => mainUseCase.login(
+        identity: emailController.text,
+        password: passwordController.text,
+        onResponse: (_) => Get.offAll(HomePage()),
+        onError: (error) => showError(error),
+      ),
       onError: (error) => showError(error),
     );
   }
 
-  void getToSignup() => Get.off(SignupPage());
+  void getToLogin() => Get.off(LoginPage());
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
 
     emailController.addListener(processEmailValidation);
     passwordController.addListener(processPasswordValidation);
+    passwordConfirmController.addListener(processPasswordConfirmValidation);
 
     return Scaffold(
       backgroundColor: theme.palette.background,
@@ -95,14 +122,14 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: .only(right: 3.w, left: 2.w),
                       child: Text(
-                        "Войти",
+                        "Создать аккаунт",
                         style: theme.styles.nunitoBold32.copyWith(
                           color: theme.palette.text,
                         ),
                       ),
                     ),
                     Text(
-                      "Войдите в аккаунт, чтобы начать",
+                      "Создайте аккаунт, чтобы начать",
                       style: theme.styles.nunitoMedium16.copyWith(
                         color: theme.palette.text,
                       ),
@@ -126,6 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                       controller: passwordController,
                       isPassword: true,
                     ),
+                    CustomTextField(
+                      label: "Повторите пароль",
+                      hint: "********",
+                      error: passwordConfirmError,
+                      controller: passwordConfirmController,
+                      isPassword: true,
+                    ),
                   ],
                 ),
               ],
@@ -138,13 +172,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: CustomFilledButton.orange(
                     theme: theme,
                     text: "Войти",
-                    onPressed: loginValidation ? processLogin : null,
+                    onPressed: signupValidation ? processSignup : null,
                   ),
                 ),
                 GestureDetector(
-                  onTap: getToSignup,
+                  onTap: getToLogin,
                   child: Text(
-                    "Ещё нет аккаунта?",
+                    "Уже есть аккаунт?",
                     style: theme.styles.nunitoRegular12.copyWith(
                       color: theme.palette.text,
                     ),
