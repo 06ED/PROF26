@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
   final String? label;
   final String? hint;
   final String? error;
+  final FormFieldValidator<String>? validator;
   final TextEditingController controller;
   final bool isPassword;
 
@@ -15,8 +16,9 @@ class CustomTextField extends StatefulWidget {
     super.key,
     required this.label,
     required this.hint,
-    required this.error,
     required this.controller,
+    this.error,
+    this.validator,
     this.isPassword = false,
   });
 
@@ -74,7 +76,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               color: theme.palette.textSecondary,
             ),
           ),
-        TextField(
+        TextFormField(
           obscureText: widget.isPassword && isObscured,
           obscuringCharacter: "*",
           cursorColor: theme.palette.accent,
@@ -83,6 +85,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: theme.styles.nunitoRegular12.copyWith(
             color: theme.palette.text,
           ),
+          validator: widget.validator,
           controller: widget.controller,
           decoration: .new(
             filled: true,
