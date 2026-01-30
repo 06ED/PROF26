@@ -7,7 +7,6 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class CustomTextField extends StatefulWidget {
   final String? label;
   final String? hint;
-  final String? error;
   final FormFieldValidator<String>? validator;
   final TextEditingController controller;
   final bool isPassword;
@@ -17,7 +16,6 @@ class CustomTextField extends StatefulWidget {
     required this.label,
     required this.hint,
     required this.controller,
-    this.error,
     this.validator,
     this.isPassword = false,
   });
@@ -40,12 +38,16 @@ class CustomTextField extends StatefulWidget {
         initial: true,
       );
 
-      return CustomTextField(
-        label: label,
-        hint: hint,
-        error: error,
-        controller: .new(text: text),
-        isPassword: isPassword,
+      return Form(
+        key: GlobalKey<FormState>(),
+        autovalidateMode: .always,
+        child: CustomTextField(
+          label: label,
+          hint: hint,
+          controller: .new(text: text),
+          validator: (_) => error,
+          isPassword: isPassword,
+        ),
       );
     },
   );
@@ -53,6 +55,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   var isObscured = true;
+  String? _error;
 
   void switchObscure() {
     setState(() {
@@ -85,34 +88,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: theme.styles.nunitoRegular12.copyWith(
             color: theme.palette.text,
           ),
-          validator: widget.validator,
+          validator: (text) {
+            setState(() {
+              _error = widget.validator?.call(text);
+            });
+            return _error;
+          },
           controller: widget.controller,
           decoration: .new(
             filled: true,
-            fillColor: widget.error != null
-                ? theme.palette.error.withAlpha(0x4D)
-                : theme.palette.block,
+            isDense: true,
+            fillColor: WidgetStateColor.resolveWith(
+              (states) => states.contains(WidgetState.error)
+                  ? theme.palette.error.withAlpha(0x4D)
+                  : theme.palette.block,
+            ),
             hintText: widget.hint,
             hintStyle: theme.styles.nunitoRegular12.copyWith(
               color: theme.palette.hint,
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: .new(
-                color: widget.error != null
-                    ? theme.palette.error
-                    : theme.palette.border,
-                width: 1.r,
-              ),
+              borderSide: .new(color: theme.palette.border, width: 1.r),
               borderRadius: .circular(10.r),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: .new(
-                color: widget.error != null
-                    ? theme.palette.error
-                    : theme.palette.border,
-                width: 1.r,
-              ),
+              borderSide: .new(color: theme.palette.border, width: 1.r),
               borderRadius: .circular(10.r),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: .new(color: theme.palette.error, width: 1.r),
+              borderRadius: .circular(10.r),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: .new(color: theme.palette.error, width: 1.r),
+              borderRadius: .circular(10.r),
+            ),
+            errorStyle: theme.styles.nunitoRegular12.copyWith(
+              color: theme.palette.error,
             ),
             suffixIcon: widget.isPassword
                 ? GestureDetector(
@@ -129,10 +141,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   )
                 : null,
           ),
+          errorBuilder: (context, errorText) => SizedBox(),
         ),
-        if (widget.error != null)
+        if (_error != null)
           Text(
-            widget.error!,
+            _error!,
             style: theme.styles.nunitoRegular12.copyWith(
               color: theme.palette.error,
             ),
